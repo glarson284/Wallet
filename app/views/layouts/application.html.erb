@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallet</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  
+    <% if current_user %>
+    <nav>
+    <li><%= link_to "Profile", user_path(current_user.id)%></li>
+    <li><%= link_to "Cards", cards_path%></li>
+    <li><%= link_to "Add Card", new_card_path%></li>
+    <li><%= link_to "Sign Out", '/logout', method: :delete %></li>
+    </nav> 
+    <% else %>
+    <nav>
+    <li><%= link_to "Sign Up", new_user_path%></li>
+    
+    <li> <%= form_tag '/sessions', class: "form" do %>
+          <%= text_field_tag :username, nil, placeholder: "username" %>
+          <%= password_field_tag :password, nil, placeholder: "password" %>
+          <%= submit_tag "Log In" %> </li>
+    </nav>
+      <% end %>
+   
+
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>

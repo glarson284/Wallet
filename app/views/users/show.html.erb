@@ -1,0 +1,23 @@
+  <div class="name">
+  <%= @user.full_name %>
+  </div>
+  </br>
+  <% @user.cards.each do |card| %>
+  <div class="show">
+    </br>
+    <%= card.users.map(&:full_name).join(', ') %>
+    <br>
+    <%= card.ctype %>
+    <br>
+     <%= "*******" + card.cnumber.slice(6..10)  %>
+    <br>
+    <span>Expiration Date:</span>
+    <%= card.exmonth %>/
+    <%= card.exyear %>
+    <br>
+    <span>Created at: </span>
+    <%= card.created_at.to_s(:long) %>
+    </br>
+    <div class="line"></div>
+  </div>
+  <% end %>

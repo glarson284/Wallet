@@ -1,0 +1,15 @@
+
+      <ul class='show'>
+        <li> <%= @card.ctype %> </li>
+        <li> <%= @card.cnumber %> </li>
+        <li> Expires: <%= "#{@card.exmonth}/#{@card.exyear}" %> </li>
+      
+
+
+    <%= form_for :user_card, url: share_card_path do |f| %>
+        <%= f.hidden_field :card_id, value: @card.id %>
+        <%= f.select :user_id, User.all.map{ |u| [u.full_name, u.id] } %>
+        <%= f.submit 'Add to card' %>
+    <% end %>
+
+    </ul>

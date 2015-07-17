@@ -1,0 +1,30 @@
+<%= flash[:notice] if flash[:notice] %>
+<%= flash[:alert] if flash[:alert] %>
+
+<%= form_for @user do |f| %>
+
+  <% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  <% end %>
+
+  <%= f.text_field :email, {placeholder: 'Email'} %>
+
+  <%= f.text_field :username, {placeholder: 'Username'} %>
+
+  <%= f.password_field :password, {placeholder: 'Password'} %>
+
+  <%= password_field_tag :password_confirmation, nil, {placeholder: 'Confirm your password', required: true} %>
+
+  <%= f.text_field :fname, {placeholder: 'First'} %>
+
+  <%= f.text_field :lanme, {placeholder: 'Last Name'} %>
+
+  <%= f.text_field :phone, {placeholder: 'phone'} %>
+
+  <%= f.text_field :balance, {placeholder: 'Balance'} %>
+
+  <%= f.submit %>
+ 
+<% end %>

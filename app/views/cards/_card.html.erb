@@ -1,0 +1,46 @@
+
+  <div class="show">
+    <br>
+    <%= card.users.map(&:full_name).join(', ') %>
+    <br>
+    <%= link_to card.ctype, card_path(card) %>
+    <br>
+    <%= "********" + card.cnumber.slice(8..12)  %>
+
+    <br>
+    <span>Expiration Date:</span>
+    <%= card.exmonth %>/
+    <%= card.exyear %>
+    <br>
+    <%= card.created_at.to_s(:long) %>
+    <br>
+    <div class="line"></div>
+  
+
+
+    <% if card.users.include? current_user %>
+
+    <%= form_for :user_card, url: share_card_path do |f| %>
+        <%= f.hidden_field :card_id, value: card.id %>
+        <%= f.select :user_id, User.all.map{ |u| [u.full_name, u.id] } %>
+        <%= f.submit 'Add to card' %>
+    <% end %>
+
+    <%= form_for :user_card, url: destroy_card_path do |f| %>
+        <%= f.hidden_field :card_id, value: card.id %>
+        <%= f.select :user_id, User.all.map{ |u| [u.full_name, u.id] } %>
+        <%= f.submit 'Delete user' %>
+    <% end %>
+
+
+     <%= link_to "Delete", card_path(card), method: :delete %> 
+    <% end %>  
+
+
+
+
+    <% if @current_admin %>
+     <%= link_to "Delete", admin_card_path(card), method: :delete %>
+    <% end %>
+
+    </div>

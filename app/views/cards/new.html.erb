@@ -1,0 +1,21 @@
+<%= flash[:notice] if flash[:notice] %>
+<%= flash[:alert] if flash[:alert] %>
+<div class="newcard">
+<%= form_for @card do |f| %>
+
+  <% if @card.errors.any? %>
+    <% @card.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  <% end %>
+
+  <%= f.text_field :cnumber, {placeholder: 'Card Number'} %> </br>
+
+  <%= f.select :exmonth, (1..12) %>
+
+  <%= f.select :exyear, (2015..2025) %>
+
+
+  <%= f.submit "Create", id: 'submit_button'%>
+<% end %>
+</div>
